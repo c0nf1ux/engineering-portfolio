@@ -1,83 +1,104 @@
-# Software Engineering Portfolio
+# Engineering Portfolio
 
 **GitHub:** c0nf1ux | **Email:** onepunchllc@outlook.com | **Location:** United States
+
+This portfolio documents professional software engineering projects, architectural code patterns, and curated academic coursework. All professional projects are deployed to production environments or live platforms.
 
 ---
 
 ## Professional Work
 
-This portfolio documents completed software projects across autonomous systems, logistics platforms, gaming platforms, and educational robotics. All projects are deployed to production environments or live gaming platforms and serve real users or provide operational value.
+Five completed projects across autonomous systems, logistics platforms, gaming, and robotics. Each includes detailed case study documenting problem domain, technical architecture, engineering challenges, and outcomes.
 
-### Featured Projects
+### Projects
 
-1. **Curbly** — On-demand refuse collection platform. Implements real-time GPS tracking, Socket.io bidirectional communication, and JWT-based authentication. Deployed to Vercel and Render. Currently in market validation phase.
+1. **Curbly** — On-demand refuse collection platform with real-time GPS tracking and Socket.io bidirectional communication. Deployed to Vercel and Render.
 
-2. **Walter** — Autonomous trading agent system. Implements three independent trading agents (equities-focused, cryptocurrency-focused, biomimicry-based) with self-tuning parameters and RSI/VWAP mean reversion strategies. Deployed to Render with GitHub Actions orchestration.
+2. **Walter** — Autonomous trading agent system with three independent trading agents and self-tuning parameters. Deployed to Render with GitHub Actions orchestration.
 
-3. **Brainstorm** — Trading card game portfolio and deckbuilding platform. Full-stack implementation (Node.js backend, React frontend, MongoDB database). Incorporates real-time metagame analytics via automated MTGGoldfish scraping. Currently in beta testing with 12 active users.
+3. **Brainstorm** — Trading card game portfolio and deckbuilding platform. Full-stack implementation with real-time metagame analytics via automated scraping.
 
-4. **Finch** — Behavioral robotics platform with prey simulation. Implements Finch 2.0 robot control via BLE, async state machine for behavioral logic, and hardware validation testing. Educational capstone project completed ahead of schedule.
+4. **Finch** — Behavioral robotics platform with prey simulation. Educational capstone project implementing async state machines and real hardware control via BLE.
 
-5. **Fishing Simulator** — Roblox game platform with automated CI/CD pipeline. Complete game implementation (3 zones, 48 fish species, 4-tier progression system) with automated deployment from GitHub to live Roblox platform.
+5. **Fishing Simulator** — Roblox game platform with automated CI/CD pipeline. Complete game implementation deployed to live Roblox platform.
 
-Detailed case studies for each project are available in the professional-work directory. Each case study documents the problem domain, technical architecture, engineering challenges encountered, solutions implemented, and key learnings.
+**View detailed case studies in professional-work/ directory.**
 
 ---
 
-## Formal Education
+## Code Samples
 
-Southern New Hampshire University — Computer Science, Undergraduate (2022-2025)
+Representative architectural patterns from professional projects demonstrating systems design, concurrency, and data management approaches.
 
-Three years of coursework spanning data structures, algorithms, software security, database systems, computational graphics, operating systems, and applied mathematics. Complete course repository available in courses/ directory.
+- **finch-state-machine.py** — State machine with hysteresis filtering for real-time behavioral control
+- **brainstorm-data-hook.tsx** — React hook pattern for decoupled data management
+- **walter-async-queue.py** — Async producer-consumer queue pattern for autonomous systems
+- **curbly-realtime-updates.js** — Socket.io pub/sub pattern for real-time location tracking
+- **fishing-simulator-persistence.lua** — DataStore persistence with retry logic for game state durability
 
-### Course Areas of Focus
+**View code samples in professional-code-samples/ directory.**
 
-Data Structures and Algorithms (CS-300): Advanced implementations in C++ including trees, hash tables, graphs, and sorting algorithms.
+---
 
-Software Security (CS-305): Secure application design principles, encryption, secure coding practices, and SSL/TLS security protocols.
+## Academic Coursework
 
-Software Development (CS-250): Software development lifecycle and project management methodologies.
+Curated selection of coursework demonstrating technical fundamentals. Four courses selected for signal and complexity.
 
-Software Testing and Quality Assurance (CS-320): Test design strategies, quality assurance practices, and testing frameworks.
+### Featured Coursework
 
-Database Systems and Backend Development (CS-340): Client-server architecture with MongoDB; full-stack web development with Python and Node.js.
+**CS-330: Computational Graphics and Visualization**
+Advanced graphics rendering with OpenGL. Covers 3D transformations, shader programming, and real-time visualization. Demonstrates low-level graphics programming and mathematical modeling.
 
-Computational Graphics (CS-330): Graphics rendering with OpenGL, shader programming, and 3D transformations.
+**CS-305: Software Security**
+Secure application design, encryption, secure coding practices, and SSL/TLS security protocols. Real-world vulnerability analysis and remediation. Demonstrates security-first development practices.
 
-Operating Systems (CS-230): Operating system architecture and platform-level programming.
+**CS-300: Data Structures and Algorithms**
+Advanced implementations in C++ including binary search trees, hash tables, and sorting algorithms. Covers performance analysis and algorithm design patterns.
 
-Applied Statistics (MAT-243): Statistical analysis and data interpretation for STEM applications.
+**CS-340: Client-Server Development**
+Full-stack web development with MongoDB backend and client-side integration. Demonstrates database design, API development, and client-server architecture.
 
-Artificial Intelligence Literacy (IT-215): Foundational AI concepts and applied AI systems.
+**View coursework in coursework/ directory.**
 
 ---
 
 ## Technical Competencies
 
-Programming Languages: Python, JavaScript/TypeScript, C++, Java, Lua, SQL
+**Languages:** Python, JavaScript/TypeScript, C++, Java, Lua, SQL
 
-Frontend Development: React, Tailwind CSS, HTML5, CSS3, client-side routing
+**Frontend:** React, Tailwind CSS, HTML5, CSS3, client-side routing
 
-Backend Development: Node.js, Express, RESTful API design, microservices architecture
+**Backend:** Node.js, Express, RESTful API design, microservices
 
-Database Technologies: MongoDB, SQL databases, DataStore (Roblox persistence)
+**Databases:** MongoDB, SQL databases, Roblox DataStore
 
-Deployment and Operations: GitHub Actions, CI/CD pipeline orchestration, Vercel, Render, Docker containerization
+**Deployment:** GitHub Actions, CI/CD, Vercel, Render, Docker
 
-Hardware Integration: Bluetooth Low Energy (bleak library), sensor interfaces, real-time systems
+**Hardware:** Bluetooth Low Energy, sensor interfaces, real-time systems
 
-Development Tools: Git version control, Rojo (Roblox build system), Stripe API, Alpaca trading API, SaveToRoblox API
-
----
-
-## Design Principles
-
-All projects prioritize real-world deployment over theoretical completeness. Production monitoring and instrumentation are implemented from project inception, not added post-hoc. Real user data and production constraints inform architectural decisions. Automated deployment pipelines are established before launch to maximize development velocity. Integration testing against live APIs is preferred over isolated unit testing with mocks.
+**Tools:** Git, Rojo, Stripe API, Alpaca API, SaveToRoblox API
 
 ---
 
-## Contact Information
+## Principles
 
-GitHub: c0nf1ux | Email: onepunchllc@outlook.com
+All projects prioritize real-world deployment over theoretical completeness. Production monitoring and instrumentation are implemented from project inception. Real user data and production constraints inform architectural decisions. Automated deployment pipelines are established before launch. Integration testing against live APIs is preferred over isolated unit testing with mocks.
+
+---
+
+## For Graduate Programs
+
+This portfolio demonstrates:
+- **Systems thinking:** Multi-component architectures with clear separation of concerns
+- **Production maturity:** Deployed applications with real users and operational constraints
+- **Technical depth:** Low-level systems (robotics BLE), frontend (React), backend (Node.js, async), and real-time systems
+- **Problem solving:** Documentation of engineering challenges and solutions in each project
+- **Continuous learning:** Progression from coursework to autonomous shipped products
+
+---
+
+## Contact
+
+**GitHub:** c0nf1ux | **Email:** onepunchllc@outlook.com
 
 Last Updated: May 17, 2026
