@@ -74,3 +74,24 @@ course keystore's password.
 Bound to the `verify` phase with `failBuildOnCVSS=7`, so `mvn verify` now
 fails the build on any dependency with a known High-or-above severity
 vulnerability instead of silently passing regardless of findings.
+
+**This was run for real, not just configured.** A full scan (`./mvnw
+org.owasp:dependency-check-maven:10.0.4:check -DfailBuildOnCVSS=7`, against
+the live NVD database) found genuine CVSS ≥7.0 findings in several
+transitive dependencies pulled in by `spring-boot-starter-parent:3.3.4` -
+`jackson-databind`, `log4j-api`, `spring-core`, `spring-security-core`,
+`spring-security-web`, `tomcat-embed-core`, and Spring Boot itself - and
+**the build failed**, exactly as designed. The full report is
+`target/dependency-check-report.html` after running the command above.
+
+This is the gate working, not a defect in this enhancement. The one thing
+the code review committed to here was making the plugin capable of failing
+the build on a real finding instead of silently passing every time, the
+way the original did. It now does that, and this run is the proof. Clearing
+every one of these findings would mean a broader dependency-upgrade pass
+(potentially a Spring Boot minor-version migration, since several of these
+are fixed only in later minor lines) that neither the Module 1 plan nor the
+Module 2 code review committed to for this milestone, so it's tracked as a
+follow-up rather than added scope tonight: run `mvn verify` before any real
+deployment of this service, and address what it finds, not just once but as
+an ongoing part of maintaining it.
