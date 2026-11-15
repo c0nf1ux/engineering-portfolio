@@ -1,13 +1,13 @@
-# Secure REST Service (CS-499 Milestone Two — Software Design & Engineering)
+# Secure REST Service (CS-499 Milestone Two - Software Design & Engineering)
 
 Enhances and merges two CS-305 course projects into one hardened Spring Boot
 service:
 
-- `coursework/CS-305_Software-Security/CS 305 Project One Code Base` — a
+- `coursework/CS-305_Software-Security/CS 305 Project One Code Base` - a
   skeleton CRUD REST controller with no security, no validation, and a
   dead, never-called `DocData.read_document()` method that opened an
   unauthenticated JDBC connection (`root`/`root`) it never used.
-- `coursework/CS-305_Software-Security/CS 305 Project Two Code Base` — an
+- `coursework/CS-305_Software-Security/CS 305 Project Two Code Base` - an
   independent SSL/TLS server with blank keystore placeholders (`????`) and
   no working endpoint.
 
@@ -25,16 +25,16 @@ validation, centralized error handling, and an enforced dependency-risk gate.
 | Area | Original | Enhanced |
 |---|---|---|
 | TLS | Project Two's keystore config was placeholder (`????`) and never connected to the CRUD service | Real PKCS12 keystore wired into `application.properties`; every `/api/documents/**` request runs over HTTPS (port 8443) |
-| Auth | None — `CRUDController` had no security configuration at all | Spring Security, HTTP Basic, BCrypt-hashed credentials, two roles (`USER`, `ADMIN`) modeled on the course's GameAuth pattern but with real per-account secrets instead of one hardcoded `"password"` for every account |
+| Auth | None - `CRUDController` had no security configuration at all | Spring Security, HTTP Basic, BCrypt-hashed credentials, two roles (`USER`, `ADMIN`) modeled on the course's GameAuth pattern but with real per-account secrets instead of one hardcoded `"password"` for every account |
 | Authorization | None | `GET /api/documents` requires `USER` or `ADMIN`; `POST /api/documents` (create) requires `ADMIN` |
 | Input validation | `@RequestParam` with no constraints | Bean Validation (`@NotBlank`, `@Size`) on a dedicated request DTO, enforced before the service layer ever runs |
-| Error handling | None — an exception would hit Spring Boot's default error page (class name + message) | `@RestControllerAdvice` returns a fixed `{timestamp, status, error, message}` shape; the real exception is logged server-side only, never returned to the caller |
+| Error handling | None - an exception would hit Spring Boot's default error page (class name + message) | `@RestControllerAdvice` returns a fixed `{timestamp, status, error, message}` shape; the real exception is logged server-side only, never returned to the caller |
 | Dependency risk | `dependency-check-maven` was declared but had no `failBuildOnCVSS`, so the default threshold (11, a score that doesn't exist) meant the build could never fail | `failBuildOnCVSS` set to 7 (High); the unused, severely outdated `bcprov-jdk15on:1.46` dependency (declared in the original `pom.xml`, never imported anywhere in the source) was dropped entirely rather than carried forward |
-| Data layer | `DocData` — dead code, hardcoded DB credentials, never actually called | `DocumentRepository` — a real, thread-safe, in-memory `ConcurrentHashMap`. Durable persistence is intentionally out of scope for this artifact; that's the CS-340 database enhancement's job, not this category's |
-| Dead code | `customer.java` — unused scaffolding (`showInfo`/`deposit` on a balance that's never initialized, no caller anywhere in the project) | Not carried forward. The code review committed to removing it rather than leaving unused code in the artifact |
-| Method naming | `CRUDController.CRUD()` — the method is named identically to its own return type, confusing at any call site | `DocumentController.create()` / `.read()` — named for what they do, not what they return |
-| Create path | No create/update/delete endpoint existed despite the class being named `CRUDController` | `POST /api/documents` added. This goes beyond what the Module 1/2 materials explicitly listed, but the role-based-authorization enhancement that *was* explicitly committed to needs a real write operation to actually protect — there was no endpoint for `ADMIN`-only access to mean anything against otherwise |
-| Field naming | `CRUD.java` had two fields, `content` and `content2`, which the code review flagged as lazy numbered naming and committed to renaming | **Collapsed to one `content` field instead of renaming both.** The only constructor `CRUDController` ever actually called set both fields to the identical value, so there was never a second distinct piece of data to preserve a name for — renaming `content2` to something descriptive would have been naming a field that held a duplicate of `content` for no reason. Removing the redundant field is a more honest fix than renaming a duplicate; see the narrative for the full reasoning |
+| Data layer | `DocData` - dead code, hardcoded DB credentials, never actually called | `DocumentRepository` - a real, thread-safe, in-memory `ConcurrentHashMap`. Durable persistence is intentionally out of scope for this artifact; that's the CS-340 database enhancement's job, not this category's |
+| Dead code | `customer.java` - unused scaffolding (`showInfo`/`deposit` on a balance that's never initialized, no caller anywhere in the project) | Not carried forward. The code review committed to removing it rather than leaving unused code in the artifact |
+| Method naming | `CRUDController.CRUD()` - the method is named identically to its own return type, confusing at any call site | `DocumentController.create()` / `.read()` - named for what they do, not what they return |
+| Create path | No create/update/delete endpoint existed despite the class being named `CRUDController` | `POST /api/documents` added. This goes beyond what the Module 1/2 materials explicitly listed, but the role-based-authorization enhancement that *was* explicitly committed to needs a real write operation to actually protect - there was no endpoint for `ADMIN`-only access to mean anything against otherwise |
+| Field naming | `CRUD.java` had two fields, `content` and `content2`, which the code review flagged as lazy numbered naming and committed to renaming | **Collapsed to one `content` field instead of renaming both.** The only constructor `CRUDController` ever actually called set both fields to the identical value, so there was never a second distinct piece of data to preserve a name for - renaming `content2` to something descriptive would have been naming a field that held a duplicate of `content` for no reason. Removing the redundant field is a more honest fix than renaming a duplicate; see the narrative for the full reasoning |
 
 ## Running it
 
@@ -45,7 +45,7 @@ validation, centralized error handling, and an enforced dependency-risk gate.
 Local dev credentials come from `application.properties` defaults
 (`APP_USER_PASSWORD`, `APP_ADMIN_PASSWORD`, `APP_KEYSTORE_PASSWORD` env vars
 override them). The committed `keystore.p12` is a fresh self-signed
-certificate generated for this artifact — it does not reuse the original
+certificate generated for this artifact - it does not reuse the original
 course keystore's password.
 
 ## Tests
@@ -54,15 +54,15 @@ course keystore's password.
 ./mvnw test
 ```
 
-- `DocumentServiceTests` — unit tests for create/read and the not-found path.
-- `SecurityIntegrationTests` — an unauthenticated request is rejected; a
+- `DocumentServiceTests` - unit tests for create/read and the not-found path.
+- `SecurityIntegrationTests` - an unauthenticated request is rejected; a
   `USER`-role account cannot create documents; an `ADMIN`-role account can,
   and either role can read the result back; a wrong password is rejected.
-- `ValidationIntegrationTests` — invalid input is rejected with a 400 and a
+- `ValidationIntegrationTests` - invalid input is rejected with a 400 and a
   response body that never contains a stack trace or raw exception message.
-- `TlsHandshakeTests` — opens a real HTTPS socket (not MockMvc) against the
+- `TlsHandshakeTests` - opens a real HTTPS socket (not MockMvc) against the
   running embedded server and confirms the handshake succeeds and the CRUD
-  endpoint answers behind it — the actual proof that the merge works, not
+  endpoint answers behind it - the actual proof that the merge works, not
   just that the configuration compiles.
 
 ## Dependency-check gate
