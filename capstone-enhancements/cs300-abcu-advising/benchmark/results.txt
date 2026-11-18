@@ -1,0 +1,52 @@
+ABCU advising benchmark results (CMake Release build, MSVC 19.41)
+Run 2026-11-18 on: Intel Pentium Silver N5030 @ 1.10 GHz, 4 cores, 7.8 GB RAM, Windows 11
+Command: abcu_benchmark --keys scryfall_keys.tsv
+Keys: 113,933 distinct "<set>-<collector number>" printings from Scryfall bulk data
+      (extracted with extract_scryfall_keys.py). Real data, not generated.
+hit = lookup of a key that is present; miss = lookup of that key with "-ABSENT" appended.
+Every lookup includes the shared cost of upper-casing the key into a new string.
+
+Real ABCU catalog: 8 courses (data/ABCU_Advising_Program_Input.csv)
+  structure                  load ns/course    hit ns/find   miss ns/find
+  ordered map (std::map)              937.8          227.3          354.0
+  hash table (chaining)               894.7          132.6          211.6
+
+Scaling run on 113933 real keys from scryfall_keys.tsv
+(each cell is the fastest of 5 repeats; times are per course / per lookup)
+
+n = 1000
+  structure                  load ns/course    hit ns/find   miss ns/find list ns/course
+  ordered map (std::map)              739.5          457.8          559.5           27.9
+  hash table (chaining)              1234.9          165.8          249.2          442.1
+  hash table shape: 2048 buckets, load factor 0.49, longest chain 5
+
+n = 5000
+  structure                  load ns/course    hit ns/find   miss ns/find list ns/course
+  ordered map (std::map)              884.8          510.1          606.1           31.9
+  hash table (chaining)              1039.8          172.0          266.9          550.7
+  hash table shape: 8192 buckets, load factor 0.61, longest chain 6
+
+n = 10000
+  structure                  load ns/course    hit ns/find   miss ns/find list ns/course
+  ordered map (std::map)              978.1          555.4          878.3           38.4
+  hash table (chaining)              1064.1          169.5          254.8          591.1
+  hash table shape: 16384 buckets, load factor 0.61, longest chain 5
+
+n = 25000
+  structure                  load ns/course    hit ns/find   miss ns/find list ns/course
+  ordered map (std::map)             1186.5          977.2         1190.5           95.5
+  hash table (chaining)              2153.5          458.9          485.4         1169.0
+  hash table shape: 65536 buckets, load factor 0.38, longest chain 5
+
+n = 50000
+  structure                  load ns/course    hit ns/find   miss ns/find list ns/course
+  ordered map (std::map)             1734.3         1355.3         1557.2          149.1
+  hash table (chaining)              2202.3          486.4          437.4         1246.4
+  hash table shape: 131072 buckets, load factor 0.38, longest chain 5
+
+n = 113933
+  structure                  load ns/course    hit ns/find   miss ns/find list ns/course
+  ordered map (std::map)             2317.3         1765.3         1922.1          169.7
+  hash table (chaining)              2124.1          578.3          574.0         1739.1
+  hash table shape: 262144 buckets, load factor 0.43, longest chain 6
+
