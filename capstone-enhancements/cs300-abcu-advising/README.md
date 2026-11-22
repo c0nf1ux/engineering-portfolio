@@ -6,9 +6,9 @@ a C++ tool that loads the ABCU course catalog from a CSV file into a `std::map`
 and lets the user list courses and look one up.
 
 The enhancements follow the Module 1 Enhancement Plan and the specific
-commitments made on camera in the Module 2 code-review video
-(`Downloads\CS-499\CS499_Milestone1_Video_Outline.md`, Category 1 section). The
-original file is untouched; this directory is the enhanced version.
+commitments made on camera in the Module 2 code-review video (the Category 1
+section of the recorded script). The original file is untouched; this directory
+is the enhanced version.
 
 ## What changed and why
 
@@ -109,9 +109,10 @@ filename.
   growth disabled, 13 checks across 4 tests failed; the originals were restored
   and the suite passes again. The tests are capable of failing.
 - Regression for the original bug: compiling the original file and giving it the
-  input `abc` printed "0 is not a valid option." 1,144 times in 3 seconds and
-  never exited. The enhanced program rejects the line and reaches the next
-  prompt; `menu_non_numeric_input_is_rejected_and_the_loop_still_exits` locks that in.
+  input `abc` printed "0 is not a valid option." over a thousand times in 3
+  seconds and never exited. The enhanced program rejects the line and reaches
+  the next prompt; `menu_non_numeric_input_is_rejected_and_the_loop_still_exits`
+  locks that in.
 
 ## Layout
 
